@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    @IBAction
+    private func openProducts() {
+        let viewModel = ProductDetailsViewModel(fetcher: LocalMockProductFetcher())
+        let detailsView = ProductDetailsView(viewModel: viewModel)
+        let hostingController = UIHostingController(rootView: detailsView)
+        navigationController?.pushViewController(hostingController, animated: true)
     }
-
-
 }
 
