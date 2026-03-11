@@ -83,5 +83,5 @@ struct ProductDetailsImageView: View {
 }
 
 #Preview {
-    ProductDetailsView(viewModel: ProductDetailsViewModel(fetcher: LocalMockProductFetcher()))
+    ProductDetailsView(viewModel: ProductDetailsViewModel(fetcher: LocalProductFetcher()))
 }

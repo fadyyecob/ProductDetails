@@ -56,5 +56,5 @@ struct ProductDetailsTitleBlockView: View {
 }
 
 #Preview {
-    ProductDetailsView(viewModel: ProductDetailsViewModel(fetcher: LocalMockProductFetcher()))
+    ProductDetailsView(viewModel: ProductDetailsViewModel(fetcher: LocalProductFetcher()))
 }

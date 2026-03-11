@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProductDetailsView: View {
-    @State var viewModel: ProductDetailsViewModel
+    @StateObject var viewModel: ProductDetailsViewModel
 
     var body: some View {
         switch viewModel.state {
@@ -29,8 +29,27 @@ struct ProductDetailsView: View {
             VStack(alignment: .leading) {
                 imageView(product.media.images)
                 productDescription(product)
+                addToBasketButton
+                Divider()
+                    .padding(.top, 8)
+                ProductRecommendationsCarouselView(recommendations: product.recommendations)
+                    .padding(.vertical)
             }
         }
+    }
+    
+    private var addToBasketButton: some View {
+        Button(action: { viewModel.addToBasket() }) {
+            Text(viewModel.addToBasketText)
+                .font(.headline)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.yellow)
+                .foregroundColor(.black)
+                .cornerRadius(8)
+        }
+        .padding(.horizontal)
+        .padding(.bottom)
     }
     
     private func imageView(_ images: [Product.Image]) -> some View {
@@ -39,8 +58,8 @@ struct ProductDetailsView: View {
                 URL(string: $0.url)
             },
             selectedIndex: viewModel.selectedImageIndex,
-            onSelectImage: {
-                viewModel.selectImage(at: $0)
+            onSelectImage: { index in
+                viewModel.selectedImageIndex = index
             }
         )
     }
@@ -57,5 +76,5 @@ struct ProductDetailsView: View {
 }
 
 #Preview {
-    ProductDetailsView(viewModel: ProductDetailsViewModel(fetcher: LocalMockProductFetcher()))
+    ProductDetailsView(viewModel: ProductDetailsViewModel(fetcher: LocalProductFetcher()))
 }

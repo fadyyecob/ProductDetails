@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBAction
     private func openProducts() {
-        let viewModel = ProductDetailsViewModel(fetcher: LocalMockProductFetcher())
+        let viewModel = ProductDetailsViewModel(fetcher: LocalProductFetcher())
         let detailsView = ProductDetailsView(viewModel: viewModel)
         let hostingController = UIHostingController(rootView: detailsView)
         navigationController?.pushViewController(hostingController, animated: true)

@@ -12,4 +12,5 @@ struct Product: Codable {
     let media: Media
     let titleBlock: TitleBlock
     let description: Description
+    let recommendations: Recommendations
 }

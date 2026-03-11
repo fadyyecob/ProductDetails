@@ -1,5 +1,5 @@
 //
-//  LocalMockProductFetcher.swift
+//  LocalProductFetcher.swift
 //  Bol
 //
 //  Created by Fady Yecob on 10/03/2026.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocalMockProductFetcher: ProductFetching {
+struct LocalProductFetcher: ProductFetching {
     private let decoder = JSONDecoder()
     
 	func fetchProduct() throws -> Product {
