@@ -25,12 +25,12 @@ extension Product {
             
             struct Link: Codable {
                 let text: String
-                let url: String
+                let url: URL
             }
         }
     }
     
     struct Image: Codable {
-        let url: String
+        let url: URL
     }
 }

@@ -18,7 +18,7 @@ extension Product {
             struct RecommendedProduct: Codable, Identifiable {
                 let id: String
                 let title: String
-                let imageUrl: String
+                let imageUrl: URL
                 let pricing: Pricing
             }
         }

@@ -12,7 +12,7 @@ struct ProductRecommendationCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            AsyncImage(url: URL(string: product.imageUrl)) { phase in
+            AsyncImage(url: product.imageUrl) { phase in
                 switch phase {
                 case .success(let image):
                     image
@@ -43,7 +43,7 @@ struct ProductRecommendationCardView: View {
         product: .init(
             id: "1",
             title: "Nintendo Switch OLED - Wit",
-            imageUrl: "https://media.s-bol.com/77G3GrlZMLEA/N38qYN/168x165.jpg",
+            imageUrl: URL(string: "https://media.s-bol.com/77G3GrlZMLEA/N38qYN/168x165.jpg")!,
             pricing: .init(bestOffer: .init(price: "334,-"))
         )
     )

@@ -39,7 +39,7 @@ struct ProductRecommendationsCarouselView: View {
                     .init(
                         id: "1",
                         title: "Nintendo Switch OLED - Wit",
-                        imageUrl: "https://media.s-bol.com/77G3GrlZMLEA/N38qYN/168x165.jpg",
+                        imageUrl: URL(string:  "https://media.s-bol.com/77G3GrlZMLEA/N38qYN/168x165.jpg")!,
                         pricing: .init(bestOffer: .init(price: "334,-"))
                     )
                 ]

@@ -9,7 +9,7 @@ import Foundation
 
 extension Product {
     struct ActionBar: Codable {
-        let socialUrl: String
+        let socialUrl: URL
         let socialShareText: String
     }
 }

@@ -8,6 +8,7 @@
 import Combine
 import SwiftUI
 
+@MainActor
 class ProductDetailsViewModel: ObservableObject {
     @Published private(set) var state: ViewState<Product> = .loading
     @Published var selectedImageIndex = 0
