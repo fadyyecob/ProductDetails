@@ -26,12 +26,4 @@ extension Product {
         let label: String
         let count: Int
     }
-
-    struct Pricing: Codable {
-        let bestOffer: BestOffer
-        
-        struct BestOffer: Codable {
-            let price: String
-        }
-    }
 }

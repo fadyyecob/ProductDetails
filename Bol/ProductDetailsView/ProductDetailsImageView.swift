@@ -25,7 +25,7 @@ struct ProductDetailsImageView: View {
             get: { selectedIndex },
             set: { setSelectedIndex($0) }
         )) {
-            ForEach(Array(imageURLs.enumerated()), id: \.offset) { _, url in
+            ForEach(Array(imageURLs.enumerated()), id: \.offset) { index, url in
                 AsyncImage(url: url) { phase in
                     switch phase {
                     case .success(let image):
@@ -38,6 +38,7 @@ struct ProductDetailsImageView: View {
                         ProgressView()
                     }
                 }
+                .tag(index)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))

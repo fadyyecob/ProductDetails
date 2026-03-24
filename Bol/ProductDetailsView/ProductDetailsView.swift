@@ -54,7 +54,7 @@ struct ProductDetailsView: View {
     
     private func imageView(_ images: [Product.Image]) -> some View {
         ProductDetailsImageView(
-            imageURLs: images.compactMap(\.url),
+            imageURLs: images.map(\.url),
             selectedIndex: viewModel.selectedImageIndex,
             onSelectImage: { index in
                 viewModel.selectedImageIndex = index

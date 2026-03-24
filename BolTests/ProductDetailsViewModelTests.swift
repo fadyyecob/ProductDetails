@@ -13,12 +13,14 @@ struct ProductDetailsViewModelTests {
 
     // MARK: - addToBasketText
 
-    @Test func addToBasketText_whenBasketIsEmpty_returnsAddToBasket() {
+    @MainActor @Test
+    func addToBasketText_whenBasketIsEmpty_returnsAddToBasket() {
         let sut = ProductDetailsViewModel(fetcher: MockProductFetcher(result: .success(makeProduct())))
         #expect(sut.addToBasketText == "Add to basket")
     }
 
-    @Test func addToBasketText_afterAddingItems_includesCount() {
+    @MainActor @Test
+    func addToBasketText_afterAddingItems_includesCount() {
         let sut = ProductDetailsViewModel(fetcher: MockProductFetcher(result: .success(makeProduct())))
         sut.addToBasket()
         #expect(sut.addToBasketText == "Add to basket (1)")
@@ -28,30 +30,37 @@ struct ProductDetailsViewModelTests {
 
     // MARK: - loadProduct
 
-    @Test func loadProduct_onSuccess_setsLoadedState() async {
+    @MainActor @Test
+    func loadProduct_onSuccess_setsLoadedState() async {
         let product = makeProduct()
-        let sut = await ProductDetailsViewModel(fetcher: MockProductFetcher(result: .success(product)))
+        let sut = ProductDetailsViewModel(fetcher: MockProductFetcher(result: .success(product)))
         await sut.loadProduct()
-        guard case .loaded(let loaded) = await sut.state else {
+        guard case .loaded(let loaded) = sut.state else {
             Issue.record("Expected loaded state")
             return
         }
-        await #expect(loaded.titleBlock.title == product.titleBlock.title)
+        #expect(loaded.titleBlock.title == product.titleBlock.title)
     }
 
-    @Test func loadProduct_onFailure_setsErrorState() async {
-        let sut = await ProductDetailsViewModel(fetcher: MockProductFetcher(result: .failure(MockError())))
+    @MainActor @Test
+    func loadProduct_onFailure_setsErrorState() async {
+        let sut = ProductDetailsViewModel(fetcher: MockProductFetcher(result: .failure(MockError())))
         await sut.loadProduct()
-        guard case .error = await sut.state else {
+        guard case .error = sut.state else {
             Issue.record("Expected error state")
             return
         }
     }
 }
 
-private func makeProduct(imageURLs: [String] = ["https://example.com/img0.jpg", "https://example.com/img1.jpg"]) -> Product {
+private func makeProduct(
+    imageURLs: [URL] = [
+        URL(string: "https://example.com/img0.jpg")!,
+        URL(string: "https://example.com/img1.jpg")!
+    ]
+) -> Product {
     Product(
-        actionBar: .init(socialUrl: "", socialShareText: ""),
+        actionBar: .init(socialUrl: URL(string: "bol.com")!, socialShareText: ""),
         media: .init(
             promotions: [],
             images: imageURLs.map { .init(url: $0) }

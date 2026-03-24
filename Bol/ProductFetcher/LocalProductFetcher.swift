@@ -15,7 +15,7 @@ struct LocalProductFetcher: ProductFetching {
 			forResource: "product",
 			withExtension: "json"
 		) else {
-			throw NetworkError()
+			throw FetchingError()
 		}
 
 		let data = try Data(contentsOf: fileURL)
@@ -23,8 +23,8 @@ struct LocalProductFetcher: ProductFetching {
 	}
 }
 
-struct NetworkError: LocalizedError {
+struct FetchingError: LocalizedError {
     var errorDescription: String? {
-        "A network error occured"
+        "An error occurred while fetching"
     }
 }
